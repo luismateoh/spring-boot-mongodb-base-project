@@ -1,3 +1,11 @@
+FROM gradle AS build
+RUN mkdir -p /workspace
+WORKDIR /workspace
+COPY build.gradle /workspace
+COPY settings.gradle /workspace
+COPY src /workspace/src
+RUN gradle build -DskipTests
+
 FROM openjdk:8-jdk-alpine
 LABEL maintainer="author@javatodev.com"
 VOLUME /main-app
